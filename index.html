@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .big {
+            width: 500px;
+            height: 700px;
+            background: deepskyblue;
+            position: absolute;
+            overflow: hidden;
+            left: 774px;
+        }
+
+        .small {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 650px;
+            left: 225px;
+            margin-bottom: 0;
+        }
+
+        #zd_1 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 618px;
+            left: 234px;
+            display: none;
+        }
+
+        #zd_2 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 618px;
+            left: 234px;
+            display: none;
+        }
+
+        #zd_3 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 618px;
+            left: 234px;
+            display: none;
+        }
+
+        #zd_4 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 618px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_1 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_2 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_3 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_4 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_5 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_6 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_7 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #zdj_8 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: -32px;
+            left: 234px;
+            display: none;
+        }
+
+        #start {
+            width: 140px;
+            height: 40px;
+            background: #31ff00;
+            position: absolute;
+            left: 180px;
+            top: 518px;
+            text-align: center;
+            border: 0;
+        }
+
+        #start span {
+            display: inline-block;
+            padding: 10px;
+
+        }
+
+        #score {
+            width: 200px;
+            height: 30px;
+            background: cornflowerblue;
+            text-align: center;
+            margin-top: 10px;
+            position: absolute;
+
+        }
+
+        #A_blood {
+            width: 200px;
+            height: 35px;
+            position: relative;
+            margin-top: 40px;
+            background: #96ff7d;
+            text-align: center;
+
+        }
+
+        #blood {
+            width: 200px;
+            height: 30px;
+            background: red;
+            position: relative;
+            border-radius: 5px;
+            margin-top: 0;
+        }
+
+        
+    </style>
+    <script>
+        window.onload = function () {
+            var big = document.getElementById("big");
+            var small = document.getElementById("small");
+            var zd_1 = document.getElementById("zd_1");
+            var zd_2 = document.getElementById("zd_2");
+            var zd_3 = document.getElementById("zd_3");
+            var zd_4 = document.getElementById("zd_4");
+            var blood = document.getElementById("blood");
+            var zdj_1 = document.getElementById("zdj_1");
+            var zdj_2 = document.getElementById("zdj_2");
+            var zdj_3 = document.getElementById("zdj_3");
+            var zdj_4 = document.getElementById("zdj_4");
+            var zdj_5 = document.getElementById("zdj_5");
+            var zdj_6 = document.getElementById("zdj_6");
+            var zdj_7 = document.getElementById("zdj_7");
+            var zdj_8 = document.getElementById("zdj_8");
+            var start = document.getElementById("start");
+            var score = document.getElementById("score");
+            var A_blood = document.getElementById('A_blood');
+            var zdjarr = [zdj_1, zdj_2, zdj_3, zdj_4, zdj_5, zdj_6, zdj_7, zdj_8]
+
+
+            var zd_speed_1 = 0;
+            var zd_speed_2 = 0;
+            var zd_speed_3 = 0;
+            var zd_speed_4 = 0;
+            var first_zdj = 0;
+            var second_zdj = 0;
+            var third_zdj = 0;
+            var four_zdj = 0;
+            var five_zdj = 0;
+            var six_zdj = 0;
+            var seven_zdj = 0;
+            var eight_zdj = 0;
+            var score_1 = 0;
+            var blood_1 = 100;
+            var x=200;          //血量长度
+            var big_height = 500;           //子弹频率
+            var zdj_height = 1000;             //战斗机频率
+            start.onclick = function (event) {
+                start.style.display = "none";
+                zd_1.style.display = "block";
+
+                var big_left = big.offsetLeft;        //774,大边框距离左边位置
+                var big_top = big.offsetTop;         //0
+                var speed = 2;
+                var zdj_speed = 1;
+                var a = event.clientY;              //549
+                var b = event.clientX;              //1042
+                setInterval(function () {
+                    if (a <= (big_top + 675)) {
+                        big.onmousemove = function (event) {
+                            a = event.clientY;
+                            b = event.clientX;
+                            small.style.top = a - 25 + 'px';
+                            small.style.left = b - big_left - 25 + 'px';
+                        }
+                    }
+                    ;
+                    if (b <= (big_left + 475) || b >= big_left + 25) {
+                        big.onmousemove = function (event) {
+                            a = event.clientY;
+                            b = event.clientX;
+                            small.style.top = a - 25 + 'px';
+                            small.style.left = b - big_left - 25 + 'px';
+                        }
+                    }
+                    if (a >= (big_top + 675)) {
+                        big.onmousemove = null;
+                    }
+                    ;
+                    if (b >= (big_left + 475) || b < big_left + 25) {
+                        big.onmousemove = null;
+                    }
+                    ;
+
+                }, 1);
+                setInterval(function () {
+                    document.onmousemove = function (event) {
+                        a = event.clientY;              //549
+                        b = event.clientX;
+                    }
+                }, 1);
+
+
+                function zidanspeed(obj, zidan_speed_, time) {
+                    setTimeout(function () {
+                        obj.style.top = small.offsetTop - 32 + 'px';
+                        obj.style.left = small.offsetLeft + 9 + 'px';
+                        obj.style.display = "block";
+                        setInterval(function () {
+
+                            obj.style.top = (obj.offsetTop - speed) + 'px';
+                            zidan_speed_++;
+                            for (var i = 0; i < zdjarr.length; i++) {
+                                if (obj.offsetTop - zdjarr[i].offsetTop < 32 && obj.offsetTop - zdjarr[i].offsetTop >= -16) {
+                                    if (obj.offsetLeft - zdjarr[i].offsetLeft < 32 && obj.offsetLeft - zdjarr[i].offsetLeft >= 0) {
+                                        zdjarr[i].style.display = "none";
+                                        score_1 += 10;
+                                        score.innerText = "得分:" + score_1 + '分';
+                                    }
+
+                                }
+                            }
+
+                            if (zidan_speed_ == big_height) {
+                                obj.style.top = small.offsetTop - 32 + 'px';
+                                obj.style.left = small.offsetLeft + 9 + 'px';
+                                zidan_speed_ = 0;
+                                obj.style.display = "block";
+                            }
+                            ;
+                        }, 0.5);
+                    }, time);
+                }
+
+                zidanspeed(zd_1, zd_speed_1, 1);
+                zidanspeed(zd_2, zd_speed_2, 500);
+                zidanspeed(zd_3, zd_speed_3, 1000);
+                zidanspeed(zd_4, zd_speed_4, 1500);
+
+                function zdj(obj, zdj_speed_, time) {
+                    setTimeout(function () {
+
+                        obj.style.top = (big.offsetTop - 32) + 'px';
+                        obj.style.left = Math.floor(Math.random() * 468) + 'px';
+                        obj.style.display = "block";
+                        setInterval(function () {
+                            obj.style.top = (obj.offsetTop + zdj_speed) + 'px';
+                            zdj_speed_++;
+
+                            if (small.offsetTop - obj.offsetTop < 32 && small.offsetTop - obj.offsetTop >= -50) {
+                                if (obj.offsetLeft - small.offsetLeft < 50 && small.offsetLeft - obj.offsetLeft < 32) {
+                                    obj.style.display = "none";
+                                    blood.style.width=(x-20)+"px";
+                                    x=x-20;
+                                    score_1 -= 10;
+                                    blood_1 -= 10;
+                                    A_blood.innerHTML = "当前血量:"+blood_1+"%";
+                                    score.innerText = "得分:" + score_1 + '分';
+
+                                }
+
+                            }
+
+
+                            if (zdj_speed_ == zdj_height) {
+                                obj.style.top = (big.offsetTop - 32) + 'px';
+                                obj.style.left = Math.floor(Math.random() * 468) + 'px';
+                                zdj_speed_ = 0;
+                                obj.style.display = "block";
+                            }
+                        }, 1)
+                    }, time);
+                }
+
+                zdj(zdj_1, first_zdj, 1);
+                zdj(zdj_3, third_zdj, 1000);
+                zdj(zdj_2, second_zdj, 1500);
+                zdj(zdj_4, four_zdj, 500);
+                zdj(zdj_5, five_zdj, 2000);
+                zdj(zdj_6, six_zdj, 2500);
+                zdj(zdj_7, seven_zdj, 3000);
+                zdj(zdj_8, eight_zdj, 3500);
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="big" id="big">
+    <div id="score">得分:0</div>
+    <div id="A_blood">当前血量:100%
+    </div>
+    <div id="blood"></div>
+    <button id="start"><span>开始游戏</span></button>
+    <img src="haonan.png" class="small" id="small">
+
+
+    <img src="zidan.png" id="zd_1">
+    <img src="zidan.png" id="zd_2">
+    <img src="zidan.png" id="zd_3">
+    <img src="zidan.png" id="zd_4">
+    <img src="pyr.jpg" id="zdj_1">
+    <img src="shezhang.jpg" id="zdj_2">
+    <img src="pyr.jpg" id="zdj_3">
+    <img src="jige.png" id="zdj_4">
+    <img src="wuo.jpg" id="zdj_5">
+    <img src="yuhao.jpg" id="zdj_6">
+    <img src="yugan.jpg" id="zdj_7">
+    <img src="zhihui.jpg" id="zdj_8">
+
+
+</div>
+<img src="jige.png" alt="" width="10px" height="10px" id="xhz">
+</body>
+</html>
